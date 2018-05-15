@@ -1,0 +1,251 @@
+@DataProvider
+
+driver.findElement(By.xpath("//*[@id='   ']/tbody/tr[3]/td[2]")).getText();
+
+3rd row, 2nd col data....
+
+
+driver.manage().window().maximize();
+
+driver.manage().timeOuts().implicitlywait(n,units);
+            options     timeouts       
+
+Thead.sleep
+driver.wait
+
+===============================
+ '''get href attribute value
+driver.findElement(By.linkText("TELCO")).getAttribute("href")
+
+  '''get the x and y coordinates of an element
+WebElement w=driver.findElement(By.linkText("TELCO"));
+Point p=w.getLocation();
+p.getX();
+p.getY();
+=================================
+
+  '''get all the links in the webpage contains word selenium
+List<WebElement> lst=driver.findElements(By.xpath("//a[contains(.,'selenium')]"));
+for(WebElement w : lst)
+{
+  w.getText();
+}
+
+======================================
+
+getWindowHandle------current focused window address it will get
+getWindowHandles-----all the window address
+
+
+findElement------- 1 specific element  and we can store in WebElement
+findElemnets------- find similar multiple elements we can store in List
+
+String
+StringBuffer
+
+=====================================
+css identifier-----------to locate element
+--------------------
+       css is faster compared to xpath.
+----------------------------------------------------------------------------------
+xpath                       css
+//div                         div
+
+//                              *
+
+/                               >
+
+@id                           #
+
+@class                       .
+
+@name                      name
+
+@href                        href
+
+================================
+
+
+xpath=//span/div//table
+css =span>div*table
+
+
+xpath=//input[@id='gbqfq']
+css=input#gbqfq
+
+
+xpath=//input[@class='abc']
+css=input.abc
+
+
+
+prefix and postfix
+
+^=  ---------starts with
+$= ----------ends with
+*= ----------any where in the middle (contains)
+
+title="selenium automation testing"
+
+css=title[^='selenium']
+css=title[*='automation']
+css=title[$='testing']
+======================================
+
+
+
+''''''''yahoo login
+
+fd.findElement(By.name("username")).sendKeys("xxxxxxx");
+fd.findElement(By.name("passwd")).sendKeys("xxxxxxx");
+fd.findElement(By.name("signin")).click();
+==================================================
+
+yahoo--registration---month  (validate the list is having all the values jan---dec)
+
+public void month_list_validate()
+{
+WebElement m=fd.findElement(By.id("month"));
+List<WebElement> lst=m.findElements(By.tagName("option"));
+String month[]={"January","February","March","April","May","June".....................................};
+int i=0;
+for(WebElement w : lst)
+{
+  if(month[i]!=w.getText())
+  {
+     Reporter.log("month is not matching   :"+month[i]);
+  }
+}
+}
+  ''''''''''''''in this  the object code, script code both are integrated togeather,,,,, this is specific to the web application
+================================================================================
+
+''''''''''''in the below code,,,,, the object code and script code are seperated,,,,,  the script code can be used for any web app
+        only the object code will change based on the webapplication.
+        
+public void month_list_validate(WebElement month,String arr_m[])
+{
+	List<WebElement> lst=month.findElements(By.tagName("option"));
+	int i=0;
+	for(WebElement w : lst)
+	{
+	  if(arr_m[i]!=w.getText())
+	  {
+	     Reporter.log("month is not matching   :"+arr_m[i]);
+	  }
+	}
+}
+=====================================
+
+String m[]={"January","February","March".......................};
+month_list_validate(fd.findElement(By.id("month")), m);---------yahoo
+
+
+
+String m[]={"Jan","Feb","Mar".............................}
+month_list_validate(fd.findElement(By.id("month")),m);--------other website
+
+======================================================================================================
+
+public void edit_type(WebElement w,String val)
+{
+  w.sendKeys(val);
+}
+public void button_click(WebElement w)
+{
+ w.click();
+}
+
+========================================
+
+edit_type(fd.findElement(By.name("username")),"xxxxxxxx");
+edit_type(fd.findElement(By.name("passwd")),"xxxxxxxxx");
+button_click(fd.findElement(By.name("signin"));
+=================================================
+
+edit_type(fd.findElement(By.name("Email")),"xxxxxxxx")
+edit_type(fd.findElement(By.name("passwd")),"xxxxxx")
+button_click(fd.findElement(By.id("u_0_n")));
+
+
+
+
+Object Model Framework
+              reusability for any web application having same functionality
+              easy for maintenance
+              if any changes are required only the object code will change........not the scripted code
+---------------------------------------------------------------------------------------
+
+public void lst_select(WebElement w,String val)
+{
+  new Select(w).selectByVisibleText(val);
+}
+
+==================================================
+
+develop page object model framework----------for registration  (should work for facebook, yahoo)
+
+===============================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

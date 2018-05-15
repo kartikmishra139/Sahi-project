@@ -1,0 +1,98 @@
+package selinium;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Random;
+
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+
+public class DynamicTestGeneration {
+
+
+	public int randomNumber()
+	{
+		Random rand=new Random();
+		int n=rand.nextInt(30)+1;
+		return n;
+	}
+	public String randomAlpha() 
+    {
+		 String str1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	     String str2="";
+	     while(str2.length()<=10)
+	     {
+	    	 str2=str2+str1.charAt((int)(Math.random()*26));
+	     }
+	     return str2;
+	}
+ 	public String randomAlphanumeric() 
+ 	{
+		 String str1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	     String str2="";
+	     while(str2.length()<=10)
+	     {
+	    	 str2=str2+str1.charAt((int)(Math.random()*36));
+	     }
+	     return str2;
+	 }
+ 	public String randommonth()
+ 	{
+ 		String mm[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+ 		
+ 		Random rand=new Random();
+		int n=rand.nextInt(11)+0;
+		return mm[n];		
+ 	}
+ 	public String randomyear()
+ 	{
+ 		String yy[]={"1980","1981","1982","1993","2003","2005","2001"};
+ 		
+ 		Random rand=new Random();
+		int n=rand.nextInt(6)+0;
+		return yy[n];		
+ 	}
+ 	public String randomgender()
+ 	{
+ 		String gen[]={"Male","Female"};
+ 		
+ 		Random rand=new Random();
+		int n=rand.nextInt(2)+0;
+		return gen[n];		
+ 	}
+ 	
+	public static void main(String[] args) throws Exception
+	{
+		DynamicTestGeneration d=new DynamicTestGeneration();
+		
+		FileInputStream fin=new FileInputStream("D:\\Facebook.xls");
+		HSSFWorkbook wb =new HSSFWorkbook(fin);// get workbook in the file
+		HSSFSheet s=wb.getSheet("Sheet1");// get sheet in the workbook
+		Row row;
+		String email;	 
+		for(int r=1;r<=10;r++)
+		{
+			row=s.createRow(r);
+			row.createCell(0).setCellValue(d.randomAlpha());
+			row.createCell(1).setCellValue(d.randomAlpha());
+			
+			email=d.randomAlpha()+"@gmail.com";
+			row.createCell(2).setCellValue(email);
+			row.createCell(3).setCellValue(email);
+			
+			row.createCell(4).setCellValue(d.randomAlphanumeric());
+			row.createCell(5).setCellValue(d.randomNumber());
+			row.createCell(6).setCellValue(d.randommonth());
+			row.createCell(7).setCellValue(d.randomyear());
+			row.createCell(8).setCellValue(d.randomgender());
+		}	
+		 FileOutputStream fout=new FileOutputStream("D:\\Facebook.xls");
+		 wb.write(fout);
+		 fin.close();
+		 fout.close();	
+	
+	}
+	
+	
+}
